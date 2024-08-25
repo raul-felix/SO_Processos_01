@@ -56,7 +56,7 @@ public class RedesController {
 				String linha = buffer.readLine();
 				while (linha != null) {
 					StringBuffer nomeAdaptador = new StringBuffer();
-					if (linha.contains("Adaptador")) {
+					if (linha.contains(": <")) {
 						nomeAdaptador = new StringBuffer(linha);
 					}
 					do {
@@ -64,13 +64,13 @@ public class RedesController {
 						if (linha == null) {
 							break;
 						}
-						if (linha.contains("IPv4")) {
+						if (linha.contains("inet ")) {
 							System.out.println(nomeAdaptador);
 							System.out.println(linha);
 							System.out.println();
 						}
 					}
-					while (!linha.contains("Adaptador"));
+					while (!linha.contains(": <"));
 				}
 				buffer.close();
 				leitor.close();
@@ -114,10 +114,8 @@ public class RedesController {
 				BufferedReader buffer = new BufferedReader(leitor);
 				String linha = buffer.readLine();
 				while (linha != null) {
-					if (linha.contains("M�dia")) {
-						String[] linhaArr = linha.split(" ");
-						String media = linhaArr[linhaArr.length - 1];
-						System.out.println("Tempo médio do ping: " + media);
+					if (linha.contains("avg")) {
+						System.out.println(linha);
 					}
 					linha = buffer.readLine();
 				}
